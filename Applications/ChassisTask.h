@@ -30,6 +30,7 @@ typedef struct
 typedef struct
 {
     const RC_ctrl_t *chassis_rc_ctrl;
+    const gimbal_motor_t *chassis_yaw_motor; 
     chassis_mode_e chassis_mode;
     chassis_mode_e chassis_last_mode;
     chassis_motor_t chassis_motor[4];
@@ -60,6 +61,9 @@ typedef struct
 #define CHASSIS_CONTROL_FREQUENCE 500.0f
 #define CHASSIS_VX_RC_SEN 0.006f
 #define CHASSIS_VY_RC_SEN 0.005f
+
+#define CHASSIS_WZ_SET_SCALE -1.0f
+#define MOTOR_DISTANCE_TO_CENTER 0.1f
 
 #endif
 

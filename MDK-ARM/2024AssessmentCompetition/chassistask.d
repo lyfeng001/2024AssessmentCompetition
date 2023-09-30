@@ -21,3 +21,4 @@
 2024assessmentcompetition\chassistask.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h
 2024assessmentcompetition\chassistask.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h
 2024assessmentcompetition\chassistask.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h
+2024assessmentcompetition\chassistask.o: F:\software\Keil_v5\ARM\ARMCC\Bin\..\include\math.h

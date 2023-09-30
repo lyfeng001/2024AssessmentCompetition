@@ -107,5 +107,4 @@ const motor_measure_t *get_chassis_motor_meature_point(uint8_t i)
 	
 	
 	
-	
 

@@ -13,3 +13,8 @@ void gimbal_task(void const * argument)
 }
 
 
+const gimbal_motor_t *get_yaw_motor_point(void)
+{
+    return &gimbal_control.gimbal_yaw_motor;
+}
+
