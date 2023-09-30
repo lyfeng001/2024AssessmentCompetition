@@ -10,7 +10,7 @@ typedef struct
     int16_t last_ecd;
 	int16_t ecd_count;
 	int16_t given_current;
-} motor_measure_t; //定义电机数据结构体
+} motor_measure_t; //锟斤拷锟斤拷锟斤拷锟斤拷锟捷结构锟斤拷
 
 
 typedef enum
@@ -28,6 +28,7 @@ typedef enum
 
 void CAN_cmd_chassis(int16_t motor1, int16_t motor2, int16_t motor3, int16_t motor4);
 void CAN_cmd_gimbal(int16_t yaw);
+extern const motor_measure_t *get_chassis_motor_meature_point(uint8_t i);
 
 #endif
 

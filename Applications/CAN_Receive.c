@@ -13,7 +13,7 @@
 	
 	
 extern CAN_HandleTypeDef hcan1; //建立can总线句柄 用于接收can1数据
-motor_measure_t motor_chassis[5]; //建立电机数据结构体
+static motor_measure_t motor_chassis[5]; //建立电机数据结构体
 
 
 	
@@ -97,6 +97,10 @@ void CAN_cmd_chassis(int16_t motor1, int16_t motor2, int16_t motor3, int16_t mot
 }
 	
 
+const motor_measure_t *get_chassis_motor_meature_point(uint8_t i)
+{
+    return &motor_chassis[(i & 0x03)];
+}
 
 
 	

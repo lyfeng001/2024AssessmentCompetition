@@ -28,17 +28,32 @@ typedef struct
 
 typedef struct
 {
-    RC_ctrl_t *chassis_rc_ctrl;
+    const RC_ctrl_t *chassis_rc_ctrl;
     chassis_mode_e chassis_mode;
     chassis_mode_e chassis_last_mode;
     chassis_motor_t chassis_motor[4];
-    pid_type_def speed_pid;
+    pid_type_def speed_pid[4];
     pid_type_def follow_yaw_angle_pid;
 
     
 }chassis_move_t;
 
+#define M2006_MOTOR_SPEED_PID_KP 15000.0f
+#define M2006_MOTOR_SPEED_PID_KI 0.0f//10.0f
+#define M2006_MOTOR_SPEED_PID_KD 200.0f
+#define M2006_MOTOR_SPEED_PID_MAX_OUT 16000.0
+#define M2006_MOTOR_SPEED_PID_MAX_IOUT 2000.0f
 
+
+#define CHASSIS_FOLLOW_GIMBAL_PID_KP 10.0f
+#define CHASSIS_FOLLOW_GIMBAL_PID_KI 0.0f
+#define CHASSIS_FOLLOW_GIMBAL_PID_KD 350.0f
+#define CHASSIS_FOLLOW_GIMBAL_PID_MAX_OUT 6.0f
+#define CHASSIS_FOLLOW_GIMBAL_PID_MAX_IOUT 0.2f
+
+
+#define CHASSIS_MOTOR_RPM_TO_VECTOR_SEN 0.000415809748903494517209f
+#define CHASSIS_CONTROL_FREQUENCE 500.0f
 
 
 #endif
