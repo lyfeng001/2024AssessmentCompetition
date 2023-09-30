@@ -3,11 +3,33 @@
 #include "CAN_Receive.h"
 #include "pid.h"
 
+
+#define rc_deadband_limit(input, output, dealine)        \
+    {                                                    \
+        if ((input) > (dealine) || (input) < -(dealine)) \
+        {                                                \
+            (output) = (input);                          \
+        }                                                \
+        else                                             \
+        {                                                \
+            (output) = 0;                                \
+        }                                                \
+    }
+
+
+
 chassis_move_t chassis_move_data;
 void chassis_init(chassis_move_t* chassis_move_data);
+void chassis_mode_change_control_transit(chassis_move_t* chassis_move_data);
 void chassis_mode_set(chassis_move_t* chassis_move_data);
 void chassis_feedback_update(chassis_move_t* chassis_move_data);
-void chassis_control_loop();
+void chassis_control_loop(chassis_move_t* chassis_move_data);
+
+void chassis_zero_force_control(chassis_move_t* chassis_move_data);
+void chassis_no_move_control(chassis_move_t* chassis_move_data);
+void chassis_follow_yaw_control(chassis_move_t* chassis_move_data);
+
+
 
 void chassis_task(void const * argument)
 {
@@ -15,9 +37,9 @@ void chassis_task(void const * argument)
 
 	while(1)
 	{	
+		chassis_mode_change_control_transit(&chassis_move_data);
 		chassis_mode_set(&chassis_move_data);
-		chassis_control_loop(&chassis_move_data);
-		
+		chassis_control_loop(&chassis_move_data);	
 //		CAN_cmd_chassis();
 		vTaskDelay(2);
 	}
@@ -45,6 +67,26 @@ void chassis_init(chassis_move_t* chassis_move_data)
 
 }
 
+void chassis_mode_change_control_transit(chassis_move_t* chassis_move_data)
+{
+	if(chassis_move_data == NULL)
+	{
+		return;
+	}
+	if(chassis_move_data->chassis_last_mode == chassis_move_data->chassis_mode)
+	{
+		return;
+	}
+
+	if((chassis_move_data->chassis_last_mode != CHASSIS_FOLLOW_GIMBAL) && chassis_move_data->chassis_mode == CHASSIS_FOLLOW_GIMBAL)
+	{
+		chassis_move_data->chassis_relative_angle_set = 0.0f;
+	}
+	chassis_move_data->chassis_last_mode = chassis_move_data->chassis_mode;
+
+}
+
+
 void chassis_feedback_update(chassis_move_t* chassis_move_data)
 {
 	if(chassis_move_data == NULL)
@@ -63,11 +105,94 @@ void chassis_feedback_update(chassis_move_t* chassis_move_data)
 
 void chassis_mode_set(chassis_move_t* chassis_move_data)
 {
-	
+	if(chassis_move_data == NULL)
+	{
+		return;
+	}
+	if (switch_is_down(chassis_move_data->chassis_rc_ctrl->rc.s[0]))
+    {
+        chassis_move_data->chassis_mode = CHASSIS_NO_MOVE;
+    }
+	else if (switch_is_up(chassis_move_data->chassis_rc_ctrl->rc.s[0]))
+    {
+        chassis_move_data->chassis_mode = CHASSIS_FOLLOW_GIMBAL;
+    }
 }
-void chassis_control_loop()
+
+
+void chassis_control_loop(chassis_move_t* chassis_move_data)
 {
-	
+	if(chassis_move_data->chassis_mode == CHASSIS_INIT)
+	{
+		chassis_zero_force_control(chassis_move_data);
+	}
+	else if(chassis_move_data->chassis_mode == CHASSIS_NO_MOVE)
+	{
+		chassis_no_move_control(chassis_move_data);
+	}
+	else if (chassis_move_data->chassis_mode == CHASSIS_FOLLOW_GIMBAL)
+	{
+		chassis_follow_yaw_control(chassis_move_data);
+	}
+}
+
+
+void chassis_zero_force_control(chassis_move_t* chassis_move_data)
+{
+	if(chassis_move_data->vx_set == NULL || chassis_move_data->vy_set == NULL || chassis_move_data->wz_set == NULL)
+	{
+		return;
+	}
+	chassis_move_data->vx_set = 0.0;
+	chassis_move_data->vy_set = 0.0;
+	chassis_move_data->wz_set = 0.0;
+	for (int i = 0;i<4;i++)
+	{
+		chassis_move_data->chassis_motor[i].give_current = 0;
+	} 
+}
+
+void chassis_no_move_control(chassis_move_t* chassis_move_data)
+{
+	if(chassis_move_data->vx_set == NULL || chassis_move_data->vy_set == NULL || chassis_move_data->wz_set == NULL)
+	{
+		return;
+	}
+
+	chassis_move_data->vx_set = 0.0;
+	chassis_move_data->vy_set = 0.0;
+	chassis_move_data->wz_set = 0.0;
 
 }
+
+
+void chassis_follow_yaw_control(chassis_move_t* chassis_move_data)
+{
+	if(chassis_move_data->vx_set == NULL || chassis_move_data->vy_set == NULL || chassis_move_data->wz_set == NULL)
+	{
+		return;
+	}
+	int16_t vx_channel, vy_channel;
+    fp32 vx_set_channel, vy_set_channel;
+	if (switch_is_up(chassis_move_data->chassis_rc_ctrl->rc.s[0]))
+	{
+		rc_deadband_limit(chassis_move_data->chassis_rc_ctrl->rc.ch[1], vx_channel, 10);
+		rc_deadband_limit(chassis_move_data->chassis_rc_ctrl->rc.ch[0], vy_channel, 10);
+
+		vx_set_channel = vx_channel * -CHASSIS_VX_RC_SEN;
+		vy_set_channel = vy_channel * -CHASSIS_VY_RC_SEN;
+	}
+	else
+	{	
+		vx_set_channel = 0;
+		vy_set_channel = 0;
+	}
+	//可添加滤波，使之更加平滑！
+	chassis_move_data->vx_set = vx_set_channel;
+	chassis_move_data->vy_set = vy_set_channel;
+
+}
+
+
+
 

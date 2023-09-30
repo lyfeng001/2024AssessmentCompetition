@@ -10,7 +10,7 @@ typedef struct
     int16_t last_ecd;
 	int16_t ecd_count;
 	int16_t given_current;
-} motor_measure_t; //���������ݽṹ��
+} motor_measure_t; 
 
 
 typedef enum

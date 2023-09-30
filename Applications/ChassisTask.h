@@ -9,6 +9,7 @@ void chassis_task(void const * argument);
 
 typedef enum 
 {
+    CHASSIS_NO_MOVE,
     CHASSIS_INIT,
     CHASSIS_FOLLOW_GIMBAL,
     CHASSIS_FOLLOW_CHASSIS,
@@ -34,7 +35,10 @@ typedef struct
     chassis_motor_t chassis_motor[4];
     pid_type_def speed_pid[4];
     pid_type_def follow_yaw_angle_pid;
-
+    fp32 chassis_relative_angle_set;
+    fp32 vx_set;
+    fp32 vy_set;
+    fp32 wz_set;
     
 }chassis_move_t;
 
@@ -54,7 +58,8 @@ typedef struct
 
 #define CHASSIS_MOTOR_RPM_TO_VECTOR_SEN 0.000415809748903494517209f
 #define CHASSIS_CONTROL_FREQUENCE 500.0f
-
+#define CHASSIS_VX_RC_SEN 0.006f
+#define CHASSIS_VY_RC_SEN 0.005f
 
 #endif
 
