@@ -102,7 +102,10 @@ const motor_measure_t *get_chassis_motor_meature_point(uint8_t i)
     return &motor_chassis[(i & 0x03)];
 }
 
-
+const motor_measure_t *get_yaw_gimbal_motor_measure_point(void)
+{
+    return &motor_chassis[4];
+}
 	
 	
 	
