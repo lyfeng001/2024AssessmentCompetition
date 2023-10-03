@@ -108,6 +108,6 @@ const motor_measure_t *get_yaw_gimbal_motor_measure_point(void)
 }
 	
 	
-	
+
 	
 

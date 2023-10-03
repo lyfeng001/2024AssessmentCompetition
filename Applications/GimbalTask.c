@@ -7,8 +7,8 @@
 gimbal_move_t gimbal_move_data;
 
 void gimbal_init(gimbal_move_t *gimbal_move_data);
-
-
+void gimbal_feedback_update(gimbal_move_t *gimbal_move_data);
+static fp32 motor_ecd_to_angle_change(uint16_t ecd, uint16_t offset_ecd);
 
 
 
@@ -48,11 +48,39 @@ void gimbal_init(gimbal_move_t *gimbal_move_data)
 	gimbal_PID_clear(&gimbal_move_data->gimbal_yaw_motor.gimbal_motor_angle_pid);
 	PID_clear(&gimbal_move_data->gimbal_yaw_motor.gimbal_motor_speed_pid);
 
+	gimbal_feedback_update(gimbal_move_data);
 
 }
 
 
+void gimbal_feedback_update(gimbal_move_t *gimbal_move_data)
+{
+	if(gimbal_move_data == NULL)
+	{
+		return;
+	}
 
+	gimbal_move_data->gimbal_yaw_motor.relative_angle = motor_ecd_to_angle_change(gimbal_move_data->gimbal_yaw_motor.gimbal_motor_measure->ecd, 
+																					gimbal_move_data->gimbal_yaw_motor.offset_ecd)
+	
+}
+
+
+
+static fp32 motor_ecd_to_angle_change(uint16_t ecd, uint16_t offset_ecd)
+{
+    int32_t relative_ecd = ecd - offset_ecd;
+    if (relative_ecd > HALF_ECD_RANGE)
+    {
+        relative_ecd -= ECD_RANGE;
+    }
+    else if (relative_ecd < -HALF_ECD_RANGE)
+    {
+        relative_ecd += ECD_RANGE;
+    }
+
+    return relative_ecd * MOTOR_ECD_TO_RAD;
+}
 
 
 

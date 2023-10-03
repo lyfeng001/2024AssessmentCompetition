@@ -26,6 +26,7 @@ typedef struct
     gimbal_mode_e gimbal_mode;
     gimbal_mode_e gimbal_last_mode;
     uint16_t offset_ecd;
+    fp32 relative_angle;
     fp32 max_relative_angle;
     fp32 min_relative_angle;
     pid_type_def gimbal_motor_speed_pid;
