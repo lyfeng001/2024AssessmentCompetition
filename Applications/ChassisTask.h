@@ -4,6 +4,7 @@
 #include "RemoteTask.h"
 #include "pid.h"
 #include "CAN_Receive.h"
+#include "GimbalTask.h"
 
 void chassis_task(void const * argument);
 
