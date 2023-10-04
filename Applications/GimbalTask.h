@@ -15,6 +15,7 @@ extern const gimbal_motor_t *get_yaw_motor_point(void);
 typedef enum 
 {
     GIMBAL_INIT,
+    GIMBAL_ZERO_FORCE,
     GIMBAL_ENCODER,
 
 }gimbal_mode_e;

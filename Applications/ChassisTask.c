@@ -38,8 +38,8 @@ void chassis_task(void const * argument)
 
 	while(1)
 	{	
-		chassis_mode_change_control_transit(&chassis_move_data);
 		chassis_mode_set(&chassis_move_data);
+		chassis_mode_change_control_transit(&chassis_move_data);
 		chassis_feedback_update(&chassis_move_data);
 		chassis_control_loop(&chassis_move_data);	
 		CAN_cmd_chassis(chassis_move_data.chassis_motor[0].give_current, chassis_move_data.chassis_motor[1].give_current, 

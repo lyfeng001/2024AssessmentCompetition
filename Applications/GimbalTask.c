@@ -9,6 +9,8 @@ gimbal_move_t gimbal_move_data;
 void gimbal_init(gimbal_move_t *gimbal_move_data);
 void gimbal_feedback_update(gimbal_move_t *gimbal_move_data);
 static fp32 motor_ecd_to_angle_change(uint16_t ecd, uint16_t offset_ecd);
+void gimbal_mode_set(gimbal_move_t *gimbal_move_data);
+void gimbal_mode_change_control_transit(gimbal_move_t *gimbal_move_data);
 
 
 
@@ -20,7 +22,9 @@ void gimbal_task(void const * argument)
 
 	while(1)
 	{
-		
+		gimbal_mode_set(&gimbal_move_data)
+		gimbal_mode_change_control_transit(&gimbal_move_data)
+
 		// CAN_cmd_chassis(500,0,0,0);
 		vTaskDelay(2);
 	}
@@ -41,6 +45,7 @@ void gimbal_init(gimbal_move_t *gimbal_move_data)
 	gimbal_move_data->gimbal_rc_ctrl = get_remote_control_point();	//获取遥控器指针
 
 	gimbal_move_data->gimbal_yaw_motor.gimbal_mode = GIMBAL_INIT;
+	gimbal_move_data->gimbal_yaw_motor.gimbal_last_mode = GIMBAL_ZERO_FORCE;
 
 	gimbal_PID_init(&gimbal_move_data->gimbal_yaw_motor.gimbal_motor_angle_pid, YAW_ANGLE_PID_MAX_OUT, YAW_ANGLE_PID_MAX_IOUT, YAW_ANGLE_PID_KP, YAW_ANGLE_PID_KI, YAW_ANGLE_PID_KD);
 	PID_init(&gimbal_move_data->gimbal_yaw_motor.gimbal_motor_speed_pid, PID_POSITION, yaw_speed_pid, YAW_SPEED_PID_MAX_OUT, YAW_SPEED_PID_MAX_IOUT);
@@ -49,6 +54,7 @@ void gimbal_init(gimbal_move_t *gimbal_move_data)
 	PID_clear(&gimbal_move_data->gimbal_yaw_motor.gimbal_motor_speed_pid);
 
 	gimbal_feedback_update(gimbal_move_data);
+
 
 }
 
@@ -81,6 +87,76 @@ static fp32 motor_ecd_to_angle_change(uint16_t ecd, uint16_t offset_ecd)
 
     return relative_ecd * MOTOR_ECD_TO_RAD;
 }
+
+
+
+
+void gimbal_mode_set(gimbal_move_t *gimbal_move_data)
+{
+	if (gimbal_move_data == NULL)
+	{
+		return;
+	}
+
+	if (gimbal_move_data->gimbal_yaw_motor.gimbal_mode == GIMBAL_INIT)
+	{
+		static uint8_t init_time = 0;
+		static uint8_t init_stop_time = 0;
+		init_time++;
+		if (fabs(gimbal_move_data->gimbal_yaw_motor.relative_angle - 0.0f) < 0.1f)
+		{
+			if(init_stop_time < 100)
+			{
+				init_stop_time++;
+			}
+		}
+		else
+		{
+			if(init_time < 6000)
+			{
+				init_time++;
+			}
+		}
+
+
+		if(init_time < 6000 && init_stop_time < 100 && !switch_is_down(gimbal_move_data->gimbal_rc_ctrl->rc.s[0])
+		{
+			return;
+		}
+		else
+		{
+			init_stop_time = 0;
+			init_time = 0;
+		}
+	}
+
+	if(switch_is_up(gimbal_mode_set->gimbal_rc_ctrl->rc.s[0]))
+	{
+		gimbal_move_data->gimbal_yaw_motor.gimbal_mode = GIMBAL_ENCODER;
+	}
+	else
+	{
+		gimbal_move_data->gimbal_yaw_motor.gimbal_mode = GIMBAL_ZERO_FORCE;
+	}
+
+
+	
+	if(gimbal_move_data->gimbal_yaw_motor.gimbal_last_mode == GIMBAL_ZERO_FORCE && 
+		gimbal_move_data->gimbal_yaw_motor.gimbal_mode != GIMBAL_ZERO_FORCE)
+	{
+		gimbal_move_data->gimbal_yaw_motor.gimbal_mode = GIMBAL_INIT;
+	}
+	gimbal_move_data->gimbal_yaw_motor.gimbal_last_mode = gimbal_move_data->gimbal_yaw_motor.gimbal_mode;
+	
+
+}
+
+
+void gimbal_mode_change_control_transit(gimbal_move_t *gimbal_move_data)
+{
+	
+}
+
 
 
 
