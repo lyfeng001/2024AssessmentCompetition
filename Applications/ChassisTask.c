@@ -217,7 +217,8 @@ void change_to_gimbal_orientation(chassis_move_t* chassis_move_data)
         cos_yaw = cos(-chassis_move_data->chassis_yaw_motor->relative_angle);
         chassis_move_data->vx_set = (cos_yaw * vx_set + sin_yaw * vy_set);
         chassis_move_data->vy_set = (-sin_yaw * vx_set + cos_yaw * vy_set);
-		chassis_move_data->chassis_relative_angle_set;
+		chassis_move_data->chassis_relative_angle_set = 0.0f;
+		chassis_move_data->wz_set = PID_calc(&chassis_move_data->follow_yaw_angle_pid, chassis_move_data->chassis_yaw_motor->relative_angle, chassis_move_data->chassis_relative_angle_set);
 	}
 	else if(chassis_move_data->chassis_mode == CHASSIS_INIT)
 	{
