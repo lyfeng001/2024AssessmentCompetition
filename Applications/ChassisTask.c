@@ -60,7 +60,7 @@ void chassis_init(chassis_move_t* chassis_move_data)
 	const static fp32 chassis_follow_yaw_pid[3] = {CHASSIS_FOLLOW_GIMBAL_PID_KP, CHASSIS_FOLLOW_GIMBAL_PID_KI, CHASSIS_FOLLOW_GIMBAL_PID_KD};
 	chassis_move_data->chassis_mode = CHASSIS_INIT;
 	chassis_move_data->chassis_rc_ctrl = get_remote_control_point();
-	chassis_move_data->chassis_yaw_motor = get_yaw_gimbal_motor_measure_point();
+	chassis_move_data->chassis_yaw_motor = get_yaw_motor_point();
 
 	for (int i=0;i<4;i++)
 	{

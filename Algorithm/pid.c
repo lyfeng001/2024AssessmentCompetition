@@ -1,5 +1,6 @@
 #include "pid.h"
 #include "main.h"
+#include "GimbalTask.h"
 
 //定义限幅函数
 #define LimitMax(input, max)   \
@@ -14,7 +15,47 @@
         }                      \
     }
 
-	
+void abs_limit(fp32 *num, fp32 Limit)
+{
+    if (*num > Limit)
+    {
+        *num = Limit;
+    }
+    else if (*num < -Limit)
+    {
+        *num = -Limit;
+    }
+}
+
+fp32 loop_fp32_constrain(fp32 Input, fp32 minValue, fp32 maxValue)
+{
+    if (maxValue < minValue)
+    {
+        return Input;
+    }
+
+    if (Input > maxValue)
+    {
+        fp32 len = maxValue - minValue;
+        while (Input > maxValue)
+        {
+            Input -= len;
+        }
+    }
+    else if (Input < minValue)
+    {
+        fp32 len = maxValue - minValue;
+        while (Input < minValue)
+        {
+            Input += len;
+        }
+    }
+    return Input;
+}	
+
+#define rad_format(Ang) loop_fp32_constrain((Ang), -PI, PI)	
+
+
 
 //pid初始化函数
 void PID_init(pid_type_def *pid, uint8_t mode, const fp32 PID[3], fp32 max_out, fp32 max_iout)
@@ -71,6 +112,20 @@ fp32 PID_calc(pid_type_def *pid, fp32 ref, fp32 set)
     }
     return pid->out;
 }
+
+void PID_clear(pid_type_def *pid)
+{
+    if (pid == NULL)
+    {
+        return;
+    }
+
+    pid->error[0] = pid->error[1] = pid->error[2] = 0.0f;
+    pid->Dbuf[0] = pid->Dbuf[1] = pid->Dbuf[2] = 0.0f;
+    pid->out = pid->Pout = pid->Iout = pid->Dout = 0.0f;
+    pid->fdb = pid->set = 0.0f;
+}
+
 
 //gimbal_PID用于yaw轴双环中的位置环，直接输入速度作为微分项系数
 

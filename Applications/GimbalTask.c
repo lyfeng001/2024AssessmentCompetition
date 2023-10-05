@@ -2,7 +2,17 @@
 #include "cmsis_os.h"
 #include "CAN_Receive.h"
 
-
+#define rc_deadband_limit(input, output, dealine)        \
+    {                                                    \
+        if ((input) > (dealine) || (input) < -(dealine)) \
+        {                                                \
+            (output) = (input);                          \
+        }                                                \
+        else                                             \
+        {                                                \
+            (output) = 0;                                \
+        }                                                \
+    }
 
 gimbal_move_t gimbal_move_data;
 
@@ -32,7 +42,7 @@ void gimbal_task(void const * argument)
 		gimbal_feedback_update(&gimbal_move_data);
 		gimbal_control_loop(&gimbal_move_data);
 
-		CAN_cmd_gimbal(gimbal_move_data->gimbal_yaw_motor.give_current);
+		CAN_cmd_gimbal(gimbal_move_data.gimbal_yaw_motor.give_current);
 		
 		vTaskDelay(2);
 	}
@@ -78,7 +88,7 @@ void gimbal_feedback_update(gimbal_move_t *gimbal_move_data)
 	}
 
 	gimbal_move_data->gimbal_yaw_motor.relative_angle = motor_ecd_to_angle_change(gimbal_move_data->gimbal_yaw_motor.gimbal_motor_measure->ecd, 
-																					gimbal_move_data->gimbal_yaw_motor.offset_ecd)
+																					gimbal_move_data->gimbal_yaw_motor.offset_ecd);
 	
 }
 
@@ -130,7 +140,7 @@ void gimbal_mode_set(gimbal_move_t *gimbal_move_data)
 		}
 
 
-		if(init_time < 6000 && init_stop_time < 100 && !switch_is_down(gimbal_move_data->gimbal_rc_ctrl->rc.s[0])
+		if(init_time < 6000 && init_stop_time < 100 && !switch_is_down(gimbal_move_data->gimbal_rc_ctrl->rc.s[0]))
 		{
 			return;
 		}
@@ -141,7 +151,7 @@ void gimbal_mode_set(gimbal_move_t *gimbal_move_data)
 		}
 	}
 
-	if(switch_is_up(gimbal_mode_set->gimbal_rc_ctrl->rc.s[0]))
+	if(switch_is_up(gimbal_move_data->gimbal_rc_ctrl->rc.s[0]))
 	{
 		gimbal_move_data->gimbal_yaw_motor.gimbal_mode = GIMBAL_ENCODER;
 	}
@@ -214,7 +224,7 @@ void gimbal_zero_force_control(gimbal_move_t *gimbal_move_data)
 		return;
 	}
 
-	gimbal_move_data->gimbal_yaw_motor.give_current = 0
+	gimbal_move_data->gimbal_yaw_motor.give_current = 0;
 }
 
 
@@ -227,9 +237,9 @@ void gimbal_encoder_control(gimbal_move_t *gimbal_move_data)
 	}
 	static int16_t yaw_channel = 0;
 
-	if(switch_is_up(gimbal_control_set->gimbal_rc_ctrl->rc.s[0]))
+	if(switch_is_up(gimbal_move_data->gimbal_rc_ctrl->rc.s[0]))
 	{
-		rc_deadband_limit(gimbal_control_set->gimbal_rc_ctrl->rc.ch[2], yaw_channel, 10);
+		rc_deadband_limit(gimbal_move_data->gimbal_rc_ctrl->rc.ch[2], yaw_channel, 10);
 		gimbal_move_data->gimbal_yaw_motor.relative_angle_set = yaw_channel*YAW_RC_COEFF;
 		if(gimbal_move_data->gimbal_yaw_motor.relative_angle_set > gimbal_move_data->gimbal_yaw_motor.max_relative_angle)
 		{
@@ -268,8 +278,8 @@ void cal_from_detla_to_current(gimbal_move_t *gimbal_move_data)
 		return;
 	}
 	gimbal_move_data->gimbal_yaw_motor.gimbal_motor_speed_set = gimbal_PID_calc(&gimbal_move_data->gimbal_yaw_motor.gimbal_motor_angle_pid,
-				gimbal_move_data->gimbal_yaw_motor.relative_angle, gimbal_move_data->gimbal_yaw_motor.gimbal_motor_angle_set,gimbal_move_data->gimbal_yaw_motor.gimbal_motor_measure->speed_rpm);
-	gimbal_move_data->gimbal_yaw_motor.give_current = PID_calc(&gimbal_move_data->gimbal_yaw_motor.gimbal_motor_speed_pid, gimbal_move_data->gimbal_yaw_motor.gimbal_motor_measure->speed_rpm, gimbal_move_data->gimbal_yaw_motor.gimbal_motor_speed_set)
+				gimbal_move_data->gimbal_yaw_motor.relative_angle, gimbal_move_data->gimbal_yaw_motor.gimbal_motor_speed_set,gimbal_move_data->gimbal_yaw_motor.gimbal_motor_measure->speed_rpm);
+	gimbal_move_data->gimbal_yaw_motor.give_current = PID_calc(&gimbal_move_data->gimbal_yaw_motor.gimbal_motor_speed_pid, gimbal_move_data->gimbal_yaw_motor.gimbal_motor_measure->speed_rpm, gimbal_move_data->gimbal_yaw_motor.gimbal_motor_speed_set);
 	
 }
 

@@ -27,27 +27,7 @@ Project File Date:  09/26/2023
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 4 (build 422)', folder: 'F:\software\Keil_v5\ARM\ARMCC\Bin'
 Build target '2024AssessmentCompetition'
-compiling GimbalTask.c...
-..\Applications\GimbalTask.h(6): error:  #20: identifier "gimbal_motor_t" is undefined
-  extern const gimbal_motor_t *get_yaw_motor_point(void);
-..\Applications\GimbalTask.c(16): error:  #20: identifier "gimbal_motor_t" is undefined
-  const gimbal_motor_t *get_yaw_motor_point(void)
-..\Applications\GimbalTask.c(18): error:  #20: identifier "gimbal_control" is undefined
-      return &gimbal_control.gimbal_yaw_motor;
-..\Applications\GimbalTask.c: 0 warnings, 3 errors
-compiling ServoTask.c...
-compiling ChassisTask.c...
-..\Applications\ChassisTask.h(33): error:  #20: identifier "gimbal_motor_t" is undefined
-      const gimbal_motor_t *chassis_yaw_motor; 
-..\Applications\ChassisTask.c(60): warning:  #223-D: function "get_yaw_gimbal_motor_measure_point" declared implicitly
-  	chassis_move_data->chassis_yaw_motor = get_yaw_gimbal_motor_measure_point();
-..\Applications\ChassisTask.c(60): error:  #513: a value of type "int" cannot be assigned to an entity of type "const <error-type> *"
-  	chassis_move_data->chassis_yaw_motor = get_yaw_gimbal_motor_measure_point();
-..\Applications\ChassisTask.c(217): warning:  #174-D: expression has no effect
-  		chassis_move_data->chassis_relative_angle_set;
-..\Applications\ChassisTask.c: 2 warnings, 2 errors
-compiling CAN_Receive.c...
-"2024AssessmentCompetition\2024AssessmentCompetition.axf" - 5 Error(s), 2 Warning(s).
+"2024AssessmentCompetition\2024AssessmentCompetition.axf" - 0 Error(s), 0 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -65,8 +45,7 @@ Package Vendor: ARM
 <h2>Collection of Component Files used:</h2>
 
    * Component: ARM::CMSIS:CORE:5.0.1
-Target not created.
-Build Time Elapsed:  00:00:02
+Build Time Elapsed:  00:00:00
 </pre>
 </body>
 </html>

@@ -6,6 +6,7 @@
 2024assessmentcompetition\chassistask.o: ..\Algorithm\pid.h
 2024assessmentcompetition\chassistask.o: F:\software\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 2024assessmentcompetition\chassistask.o: ..\Applications\CAN_Receive.h
+2024assessmentcompetition\chassistask.o: ..\Applications\GimbalTask.h
 2024assessmentcompetition\chassistask.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
 2024assessmentcompetition\chassistask.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
 2024assessmentcompetition\chassistask.o: F:\software\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h

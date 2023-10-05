@@ -29,7 +29,7 @@ typedef enum
 void CAN_cmd_chassis(int16_t motor1, int16_t motor2, int16_t motor3, int16_t motor4);
 void CAN_cmd_gimbal(int16_t yaw);
 extern const motor_measure_t *get_chassis_motor_meature_point(uint8_t i);
-extern motor_measure_t *get_yaw_gimbal_motor_measure_point(void);
+extern const motor_measure_t *get_yaw_gimbal_motor_measure_point(void);
 
 
 #endif

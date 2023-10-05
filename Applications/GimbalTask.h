@@ -8,7 +8,7 @@
 
 
 void gimbal_task(void const * argument);
-extern const gimbal_motor_t *get_yaw_motor_point(void);
+
 
 
 
@@ -44,13 +44,19 @@ typedef struct
 typedef struct 
 {
     const RC_ctrl_t *gimbal_rc_ctrl;
-    const gimbal_motor_t gimbal_yaw_motor;
+    gimbal_motor_t gimbal_yaw_motor;
 
 
 }gimbal_move_t;
 
 
+#ifndef PI
+#define PI					3.14159265358979f
+#endif
 
+#ifndef MOTOR_ECD_TO_RAD
+#define MOTOR_ECD_TO_RAD 0.000766990394f //2*PI/8192
+#endif
 
 #define YAW_SPEED_PID_KP  3600.0f
 #define YAW_SPEED_PID_KI  0.0f
@@ -69,8 +75,13 @@ typedef struct
 
 #define YAW_RC_COEFF 1.57/660.0f
 
+#define MIDDLE_YAW 1000
+
+#define HALF_ECD_RANGE 4096
+#define ECD_RANGE 8192
 
 
+extern const gimbal_motor_t *get_yaw_motor_point(void);
 
 
 
