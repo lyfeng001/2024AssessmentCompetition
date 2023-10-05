@@ -28,10 +28,13 @@ typedef struct
     gimbal_mode_e gimbal_last_mode;
     uint16_t offset_ecd;
     fp32 relative_angle;
+    fp32 relative_angle_set;
     fp32 max_relative_angle;
     fp32 min_relative_angle;
     pid_type_def gimbal_motor_speed_pid;
     gimbal_PID_t gimbal_motor_angle_pid;
+    fp32 gimbal_motor_speed_set;
+    int16_t give_current;
 
 }gimbal_motor_t;
 
@@ -42,7 +45,7 @@ typedef struct
 {
     const RC_ctrl_t *gimbal_rc_ctrl;
     const gimbal_motor_t gimbal_yaw_motor;
-    
+
 
 }gimbal_move_t;
 
@@ -64,7 +67,7 @@ typedef struct
 #define YAW_ANGLE_PID_MAX_OUT 10.0f
 #define YAW_ANGLE_PID_MAX_IOUT 0.0f
 
-
+#define YAW_RC_COEFF 1.57/660.0f
 
 
 
