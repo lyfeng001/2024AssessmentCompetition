@@ -239,10 +239,10 @@ void cal_from_whole_chassis_to_wheel(chassis_move_t* chassis_move_data)
 	{
 		for (int i = 0; i < 4; i++)
         {
-            chassis_move_data->chassis_motor[i].give_current = (int16_t)(wheel_speed[i]);
+            wheel_speed[i] = 0.0;
         }
 	}
-	else
+
 	{
 		for (int i = 0; i < 4; i++)
 		{

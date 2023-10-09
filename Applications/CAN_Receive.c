@@ -1,14 +1,22 @@
 #include "CAN_Receive.h"
 #include "main.h"
 
+float T = 0.000001;
+float fc = 100000;
+int16_t first_filter(int16_t rawdata)
+{
+	int16_t lpfdata;
+	lpfdata += (1.0 / (1.0 + 1.0/(2.0f * 3.14f *T*fc)))*(rawdata - lpfdata );
+	return lpfdata;
+}
 
 //电机数据解包
 #define get_motor_measure(ptr, data)                                    \
     {                                                                   \
         (ptr)->last_ecd = (ptr)->ecd;                                   \
         (ptr)->ecd = (uint16_t)((data)[0] << 8 | (data)[1]);            \
-        (ptr)->speed_rpm = (uint16_t)((data)[2] << 8 | (data)[3]);      \
-		(ptr)->given_current = (uint16_t)((data)[4] << 8 | (data)[5]);  \
+        (ptr)->speed_rpm = (int16_t)((data)[2] << 8 | (data)[3]);      \
+		(ptr)->given_current = (int16_t)((data)[4] << 8 | (data)[5]);  \
     }																	
 	
 	
@@ -99,7 +107,7 @@ void CAN_cmd_chassis(int16_t motor1, int16_t motor2, int16_t motor3, int16_t mot
 
 const motor_measure_t *get_chassis_motor_meature_point(uint8_t i)
 {
-    return &motor_chassis[(i & 0x03)];
+    return &motor_chassis[i];
 }
 
 const motor_measure_t *get_yaw_gimbal_motor_measure_point(void)

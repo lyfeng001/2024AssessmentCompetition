@@ -58,7 +58,7 @@ typedef struct
 #define MOTOR_ECD_TO_RAD 0.000766990394f //2*PI/8192
 #endif
 
-#define YAW_SPEED_PID_KP  3600.0f
+#define YAW_SPEED_PID_KP  100.0f
 #define YAW_SPEED_PID_KI  0.0f
 #define YAW_SPEED_PID_KD  0.0f
 
@@ -66,16 +66,16 @@ typedef struct
 #define YAW_SPEED_PID_MAX_IOUT 5000.0f
 
 
-#define YAW_ANGLE_PID_KP  8.0f
+#define YAW_ANGLE_PID_KP  200.0f
 #define YAW_ANGLE_PID_KI  0.0f
 #define YAW_ANGLE_PID_KD  0.0f
 
-#define YAW_ANGLE_PID_MAX_OUT 10.0f
+#define YAW_ANGLE_PID_MAX_OUT 60.0f
 #define YAW_ANGLE_PID_MAX_IOUT 0.0f
 
 #define YAW_RC_COEFF 1.57/660.0f
 
-#define MIDDLE_YAW 1000
+#define MIDDLE_YAW 675
 
 #define HALF_ECD_RANGE 4096
 #define ECD_RANGE 8192
