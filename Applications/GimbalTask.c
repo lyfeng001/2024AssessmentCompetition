@@ -169,9 +169,6 @@ void gimbal_mode_change_control_transit(gimbal_move_t *gimbal_move_data)
 	{
 		gimbal_move_data->gimbal_yaw_motor.relative_angle_set = gimbal_move_data->gimbal_yaw_motor.relative_angle;
 	}
-
-
-
 }
 
 
@@ -194,9 +191,6 @@ void gimbal_control_loop(gimbal_move_t *gimbal_move_data)
 	{
 		gimbal_init_control(gimbal_move_data);
 	}
-
-	
-
 }
 
 
@@ -225,14 +219,17 @@ void gimbal_encoder_control(gimbal_move_t *gimbal_move_data)
 	{
 		rc_deadband_limit(gimbal_move_data->gimbal_rc_ctrl->rc.ch[2], yaw_channel, 10);
 		gimbal_move_data->gimbal_yaw_motor.relative_angle_set = yaw_channel*YAW_RC_COEFF;
-//		if(gimbal_move_data->gimbal_yaw_motor.relative_angle_set > gimbal_move_data->gimbal_yaw_motor.max_relative_angle)
-//		{
-//			gimbal_move_data->gimbal_yaw_motor.relative_angle_set = gimbal_move_data->gimbal_yaw_motor.max_relative_angle;
-//		}
-//		else if(gimbal_move_data->gimbal_yaw_motor.relative_angle_set < gimbal_move_data->gimbal_yaw_motor.min_relative_angle)
-//		{
-//			gimbal_move_data->gimbal_yaw_motor.relative_angle_set = gimbal_move_data->gimbal_yaw_motor.min_relative_angle;
-//		}
+		
+		/*	如需限位
+		if(gimbal_move_data->gimbal_yaw_motor.relative_angle_set > gimbal_move_data->gimbal_yaw_motor.max_relative_angle)
+		{
+			gimbal_move_data->gimbal_yaw_motor.relative_angle_set = gimbal_move_data->gimbal_yaw_motor.max_relative_angle;
+		}
+		else if(gimbal_move_data->gimbal_yaw_motor.relative_angle_set < gimbal_move_data->gimbal_yaw_motor.min_relative_angle)
+		{
+			gimbal_move_data->gimbal_yaw_motor.relative_angle_set = gimbal_move_data->gimbal_yaw_motor.min_relative_angle;
+		}
+		*/
 
 	}
 	else

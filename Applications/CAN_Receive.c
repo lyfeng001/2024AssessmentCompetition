@@ -1,14 +1,6 @@
 #include "CAN_Receive.h"
 #include "main.h"
 
-float T = 0.000001;
-float fc = 100000;
-int16_t first_filter(int16_t rawdata)
-{
-	int16_t lpfdata;
-	lpfdata += (1.0 / (1.0 + 1.0/(2.0f * 3.14f *T*fc)))*(rawdata - lpfdata );
-	return lpfdata;
-}
 
 //电机数据解包
 #define get_motor_measure(ptr, data)                                    \
