@@ -19,10 +19,9 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "usart.h"
-#include "stdio.h"
 
 /* USER CODE BEGIN 0 */
-
+#include "stdio.h"
 /* 加入以下代码, 支持printf函数, 而不需要选择use MicroLIB */
 
 #if 1

@@ -31,6 +31,8 @@
 2024assessmentcompetition\pid.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h
 2024assessmentcompetition\pid.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h
 2024assessmentcompetition\pid.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h
+2024assessmentcompetition\pid.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h
+2024assessmentcompetition\pid.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h
 2024assessmentcompetition\pid.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
 2024assessmentcompetition\pid.o: ../Applications/GimbalTask.h
 2024assessmentcompetition\pid.o: ../Applications/CAN_Receive.h

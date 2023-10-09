@@ -51,6 +51,7 @@ osThreadId defaultTaskHandle;
 osThreadId ChassisTaskHandle;
 osThreadId GimbalTaskHandle;
 osThreadId ServoTaskHandle;
+osThreadId LaserTaskHandle;
 
 /* Private function prototypes -----------------------------------------------*/
 /* USER CODE BEGIN FunctionPrototypes */
@@ -61,6 +62,7 @@ void StartDefaultTask(void const * argument);
 void chassis_task(void const * argument);
 void gimbal_task(void const * argument);
 void servo_task(void const * argument);
+void laser_task(void const * argument);
 
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
 
@@ -120,8 +122,12 @@ void MX_FREERTOS_Init(void) {
   GimbalTaskHandle = osThreadCreate(osThread(GimbalTask), NULL);
 
   /* definition and creation of ServoTask */
-  osThreadDef(ServoTask, servo_task, osPriorityNormal, 0, 128);
+  osThreadDef(ServoTask, servo_task, osPriorityNormal, 0, 256);
   ServoTaskHandle = osThreadCreate(osThread(ServoTask), NULL);
+
+  /* definition and creation of LaserTask */
+  osThreadDef(LaserTask, laser_task, osPriorityNormal, 0, 256);
+  LaserTaskHandle = osThreadCreate(osThread(LaserTask), NULL);
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
@@ -199,6 +205,24 @@ __weak void servo_task(void const * argument)
     osDelay(1);
   }
   /* USER CODE END servo_task */
+}
+
+/* USER CODE BEGIN Header_laser_task */
+/**
+* @brief Function implementing the LaserTask thread.
+* @param argument: Not used
+* @retval None
+*/
+/* USER CODE END Header_laser_task */
+__weak void laser_task(void const * argument)
+{
+  /* USER CODE BEGIN laser_task */
+  /* Infinite loop */
+  for(;;)
+  {
+    osDelay(1);
+  }
+  /* USER CODE END laser_task */
 }
 
 /* Private application code --------------------------------------------------*/
