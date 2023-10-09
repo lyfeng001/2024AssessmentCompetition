@@ -108,15 +108,15 @@ void MX_FREERTOS_Init(void) {
 
   /* Create the thread(s) */
   /* definition and creation of defaultTask */
-  osThreadDef(defaultTask, StartDefaultTask, osPriorityNormal, 0, 128);
+  osThreadDef(defaultTask, StartDefaultTask, osPriorityIdle, 0, 128);
   defaultTaskHandle = osThreadCreate(osThread(defaultTask), NULL);
 
   /* definition and creation of ChassisTask */
-//  osThreadDef(ChassisTask, chassis_task, osPriorityNormal, 0, 128);
-//  ChassisTaskHandle = osThreadCreate(osThread(ChassisTask), NULL);
+  osThreadDef(ChassisTask, chassis_task, osPriorityNormal, 0, 512);
+  ChassisTaskHandle = osThreadCreate(osThread(ChassisTask), NULL);
 
   /* definition and creation of GimbalTask */
-  osThreadDef(GimbalTask, gimbal_task, osPriorityNormal, 0, 128);
+  osThreadDef(GimbalTask, gimbal_task, osPriorityNormal, 0, 512);
   GimbalTaskHandle = osThreadCreate(osThread(GimbalTask), NULL);
 
   /* definition and creation of ServoTask */

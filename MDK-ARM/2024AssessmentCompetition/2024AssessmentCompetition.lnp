@@ -41,6 +41,7 @@
 "2024assessmentcompetition\gimbaltask.o"
 "2024assessmentcompetition\remotetask.o"
 "2024assessmentcompetition\servotask.o"
+"2024assessmentcompetition\debug.o"
 "2024assessmentcompetition\pid.o"
 "2024assessmentcompetition\bsp_can.o"
 "2024assessmentcompetition\bsp_rc.o"

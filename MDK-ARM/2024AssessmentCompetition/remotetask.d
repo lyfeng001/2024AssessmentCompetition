@@ -1,7 +1,7 @@
 2024assessmentcompetition\remotetask.o: ..\Applications\RemoteTask.c
 2024assessmentcompetition\remotetask.o: ..\Applications\RemoteTask.h
-2024assessmentcompetition\remotetask.o: ..\boards\struct_typedef.h
-2024assessmentcompetition\remotetask.o: ..\boards\bsp_rc.h
+2024assessmentcompetition\remotetask.o: ../boards/struct_typedef.h
+2024assessmentcompetition\remotetask.o: ../boards/bsp_rc.h
 2024assessmentcompetition\remotetask.o: ../Core/Inc/main.h
 2024assessmentcompetition\remotetask.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h
 2024assessmentcompetition\remotetask.o: ../Core/Inc/stm32f4xx_hal_conf.h

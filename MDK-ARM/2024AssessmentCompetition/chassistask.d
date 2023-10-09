@@ -1,9 +1,9 @@
 2024assessmentcompetition\chassistask.o: ..\Applications\ChassisTask.c
 2024assessmentcompetition\chassistask.o: ..\Applications\ChassisTask.h
 2024assessmentcompetition\chassistask.o: ..\Applications\RemoteTask.h
-2024assessmentcompetition\chassistask.o: ..\boards\struct_typedef.h
-2024assessmentcompetition\chassistask.o: ..\boards\bsp_rc.h
-2024assessmentcompetition\chassistask.o: ..\Algorithm\pid.h
+2024assessmentcompetition\chassistask.o: ../boards/struct_typedef.h
+2024assessmentcompetition\chassistask.o: ../boards/bsp_rc.h
+2024assessmentcompetition\chassistask.o: ../Algorithm/pid.h
 2024assessmentcompetition\chassistask.o: F:\software\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 2024assessmentcompetition\chassistask.o: ..\Applications\CAN_Receive.h
 2024assessmentcompetition\chassistask.o: ..\Applications\GimbalTask.h
@@ -23,3 +23,4 @@
 2024assessmentcompetition\chassistask.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h
 2024assessmentcompetition\chassistask.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h
 2024assessmentcompetition\chassistask.o: F:\software\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
+2024assessmentcompetition\chassistask.o: ..\Applications\debug.h

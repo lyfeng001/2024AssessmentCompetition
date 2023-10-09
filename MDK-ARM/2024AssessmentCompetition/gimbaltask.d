@@ -3,9 +3,9 @@
 2024assessmentcompetition\gimbaltask.o: ..\Applications\CAN_Receive.h
 2024assessmentcompetition\gimbaltask.o: F:\software\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 2024assessmentcompetition\gimbaltask.o: ..\Applications\RemoteTask.h
-2024assessmentcompetition\gimbaltask.o: ..\boards\struct_typedef.h
-2024assessmentcompetition\gimbaltask.o: ..\boards\bsp_rc.h
-2024assessmentcompetition\gimbaltask.o: ..\Algorithm\pid.h
+2024assessmentcompetition\gimbaltask.o: ../boards/struct_typedef.h
+2024assessmentcompetition\gimbaltask.o: ../boards/bsp_rc.h
+2024assessmentcompetition\gimbaltask.o: ../Algorithm/pid.h
 2024assessmentcompetition\gimbaltask.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
 2024assessmentcompetition\gimbaltask.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
 2024assessmentcompetition\gimbaltask.o: F:\software\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h

@@ -1,7 +1,7 @@
 2024assessmentcompetition\pid.o: ..\Algorithm\pid.c
 2024assessmentcompetition\pid.o: ..\Algorithm\pid.h
 2024assessmentcompetition\pid.o: F:\software\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
-2024assessmentcompetition\pid.o: ..\boards\struct_typedef.h
+2024assessmentcompetition\pid.o: ../boards/struct_typedef.h
 2024assessmentcompetition\pid.o: ../Core/Inc/main.h
 2024assessmentcompetition\pid.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h
 2024assessmentcompetition\pid.o: ../Core/Inc/stm32f4xx_hal_conf.h
@@ -32,7 +32,7 @@
 2024assessmentcompetition\pid.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h
 2024assessmentcompetition\pid.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h
 2024assessmentcompetition\pid.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
-2024assessmentcompetition\pid.o: ..\Applications\GimbalTask.h
-2024assessmentcompetition\pid.o: ..\Applications\CAN_Receive.h
-2024assessmentcompetition\pid.o: ..\Applications\RemoteTask.h
-2024assessmentcompetition\pid.o: ..\boards\bsp_rc.h
+2024assessmentcompetition\pid.o: ../Applications/GimbalTask.h
+2024assessmentcompetition\pid.o: ../Applications/CAN_Receive.h
+2024assessmentcompetition\pid.o: ../Applications/RemoteTask.h
+2024assessmentcompetition\pid.o: ../boards/bsp_rc.h

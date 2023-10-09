@@ -73,7 +73,7 @@ typedef struct
 #define YAW_ANGLE_PID_MAX_OUT 60.0f
 #define YAW_ANGLE_PID_MAX_IOUT 0.0f
 
-#define YAW_RC_COEFF 1.57/660.0f
+#define YAW_RC_COEFF -1.57/660.0f
 
 #define MIDDLE_YAW 675
 

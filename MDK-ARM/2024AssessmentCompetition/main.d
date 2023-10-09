@@ -48,6 +48,6 @@
 2024assessmentcompetition\main.o: ../Core/Inc/dma.h
 2024assessmentcompetition\main.o: ../Core/Inc/usart.h
 2024assessmentcompetition\main.o: ../Core/Inc/gpio.h
-2024assessmentcompetition\main.o: ..\Applications\RemoteTask.h
-2024assessmentcompetition\main.o: ..\boards\struct_typedef.h
-2024assessmentcompetition\main.o: ..\boards\bsp_rc.h
+2024assessmentcompetition\main.o: ../Applications/RemoteTask.h
+2024assessmentcompetition\main.o: ../boards/struct_typedef.h
+2024assessmentcompetition\main.o: ../boards/bsp_rc.h

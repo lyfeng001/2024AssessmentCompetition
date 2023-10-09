@@ -3,6 +3,8 @@
 #include "CAN_Receive.h"
 #include "pid.h"
 #include "math.h"
+#include "debug.h"
+
 
 #define rc_deadband_limit(input, output, dealine)        \
     {                                                    \
@@ -44,6 +46,8 @@ void chassis_task(void const * argument)
 		chassis_mode_change_control_transit(&chassis_move_data);
 		chassis_feedback_update(&chassis_move_data);
 		chassis_control_loop(&chassis_move_data);	
+		
+		
 		CAN_cmd_chassis(chassis_move_data.chassis_motor[0].give_current, chassis_move_data.chassis_motor[1].give_current, 
 						chassis_move_data.chassis_motor[2].give_current, chassis_move_data.chassis_motor[3].give_current);
 		vTaskDelay(2);
@@ -61,7 +65,9 @@ void chassis_init(chassis_move_t* chassis_move_data)
 	chassis_move_data->chassis_mode = CHASSIS_INIT;
 	chassis_move_data->chassis_rc_ctrl = get_remote_control_point();
 	chassis_move_data->chassis_yaw_motor = get_yaw_motor_point();
-
+	chassis_move_data->vx_set = 0.0;
+	chassis_move_data->vy_set = 0.0;
+	chassis_move_data->wz_set = 0.0;
 	for (int i=0;i<4;i++)
 	{
 		chassis_move_data->chassis_motor[i].chassis_motor_measure = get_chassis_motor_meature_point(i); 
@@ -89,6 +95,7 @@ void chassis_mode_change_control_transit(chassis_move_t* chassis_move_data)
 		chassis_move_data->chassis_relative_angle_set = 0.0f;
 	}
 	chassis_move_data->chassis_last_mode = chassis_move_data->chassis_mode;
+	
 
 }
 
@@ -140,7 +147,8 @@ void chassis_control_loop(chassis_move_t* chassis_move_data)
 	{
 		chassis_follow_yaw_control(chassis_move_data);
 	}
-
+	
+	debug_send(chassis_move_data->chassis_motor[0].speed,chassis_move_data->chassis_motor[0].speed_set,0.0);
 	
 	change_to_gimbal_orientation(chassis_move_data);
 	cal_from_whole_chassis_to_wheel(chassis_move_data);
@@ -150,7 +158,7 @@ void chassis_control_loop(chassis_move_t* chassis_move_data)
 
 void chassis_zero_force_control(chassis_move_t* chassis_move_data)
 {
-	if(chassis_move_data->vx_set == NULL || chassis_move_data->vy_set == NULL || chassis_move_data->wz_set == NULL)
+	if(chassis_move_data == NULL)
 	{
 		return;
 	}
@@ -165,7 +173,7 @@ void chassis_zero_force_control(chassis_move_t* chassis_move_data)
 
 void chassis_no_move_control(chassis_move_t* chassis_move_data)
 {
-	if(chassis_move_data->vx_set == NULL || chassis_move_data->vy_set == NULL || chassis_move_data->wz_set == NULL)
+	if(chassis_move_data == NULL)
 	{
 		return;
 	}
@@ -179,7 +187,7 @@ void chassis_no_move_control(chassis_move_t* chassis_move_data)
 
 void chassis_follow_yaw_control(chassis_move_t* chassis_move_data)
 {
-	if(chassis_move_data->vx_set == NULL || chassis_move_data->vy_set == NULL || chassis_move_data->wz_set == NULL)
+	if(chassis_move_data == NULL)
 	{
 		return;
 	}
@@ -213,12 +221,12 @@ void change_to_gimbal_orientation(chassis_move_t* chassis_move_data)
 		fp32 vx_set = 0.0f, vy_set = 0.0f;
 		vx_set = chassis_move_data->vx_set;
 		vy_set = chassis_move_data->vy_set;
-        sin_yaw = sin(-chassis_move_data->chassis_yaw_motor->relative_angle);
-        cos_yaw = cos(-chassis_move_data->chassis_yaw_motor->relative_angle);
-        chassis_move_data->vx_set = (cos_yaw * vx_set + sin_yaw * vy_set);
-        chassis_move_data->vy_set = (-sin_yaw * vx_set + cos_yaw * vy_set);
+		sin_yaw = sin(-chassis_move_data->chassis_yaw_motor->relative_angle);
+		cos_yaw = cos(-chassis_move_data->chassis_yaw_motor->relative_angle);
+		chassis_move_data->vx_set = (cos_yaw * vx_set + sin_yaw * vy_set);
+		chassis_move_data->vy_set = (-sin_yaw * vx_set + cos_yaw * vy_set);
 		chassis_move_data->chassis_relative_angle_set = 0.0f;
-		chassis_move_data->wz_set = PID_calc(&chassis_move_data->follow_yaw_angle_pid, chassis_move_data->chassis_yaw_motor->relative_angle, chassis_move_data->chassis_relative_angle_set);
+		chassis_move_data->wz_set = -PID_calc(&chassis_move_data->follow_yaw_angle_pid, chassis_move_data->chassis_yaw_motor->relative_angle, chassis_move_data->chassis_relative_angle_set);
 	}
 	else if(chassis_move_data->chassis_mode == CHASSIS_INIT)
 	{
@@ -255,7 +263,7 @@ void cal_from_whole_chassis_to_wheel(chassis_move_t* chassis_move_data)
 
 void chassis_vector_to_mecanum_wheel_speed(const fp32 vx_set, const fp32 vy_set, const fp32 wz_set, fp32 wheel_speed[4])
 {
-	wheel_speed[0] = -vx_set - vy_set + CHASSIS_WZ_SET_SCALE * MOTOR_DISTANCE_TO_CENTER * wz_set;
+		wheel_speed[0] = -vx_set - vy_set + CHASSIS_WZ_SET_SCALE * MOTOR_DISTANCE_TO_CENTER * wz_set;
     wheel_speed[1] = vx_set - vy_set + CHASSIS_WZ_SET_SCALE * MOTOR_DISTANCE_TO_CENTER * wz_set;
     wheel_speed[2] = vx_set + vy_set + CHASSIS_WZ_SET_SCALE * MOTOR_DISTANCE_TO_CENTER * wz_set;
     wheel_speed[3] = -vx_set + vy_set + CHASSIS_WZ_SET_SCALE * MOTOR_DISTANCE_TO_CENTER * wz_set;

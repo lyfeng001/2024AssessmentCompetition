@@ -63,8 +63,8 @@ typedef struct
 #define CHASSIS_VX_RC_SEN 0.006f
 #define CHASSIS_VY_RC_SEN 0.005f
 
-#define CHASSIS_WZ_SET_SCALE -1.0f
-#define MOTOR_DISTANCE_TO_CENTER 0.1f
+#define CHASSIS_WZ_SET_SCALE -2.0f
+#define MOTOR_DISTANCE_TO_CENTER 0.2f
 
 #endif
 
