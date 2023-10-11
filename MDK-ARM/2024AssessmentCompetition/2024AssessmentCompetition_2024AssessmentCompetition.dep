@@ -1103,7 +1103,7 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h)(0x6506FCB8)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h)(0x6506FCB8)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h)(0x6506FCB8)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x6506FCB8)
-F (..\Applications\ChassisTask.c)(0x6523F9D1)(--c99 -c --cpu Cortex-M4.fp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Algorithm -I ../Applications -I ../boards-I.\RTE\_2024AssessmentCompetition-IF:\software\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-IF:\software\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.13.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="523" -D_RTE_ -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx-o 2024assessmentcompetition\chassistask.o --omf_browse 2024assessmentcompetition\chassistask.crf --depend 2024assessmentcompetition\chassistask.d)
+F (..\Applications\ChassisTask.c)(0x6524222D)(--c99 -c --cpu Cortex-M4.fp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Algorithm -I ../Applications -I ../boards-I.\RTE\_2024AssessmentCompetition-IF:\software\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-IF:\software\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.13.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="523" -D_RTE_ -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx-o 2024assessmentcompetition\chassistask.o --omf_browse 2024assessmentcompetition\chassistask.crf --depend 2024assessmentcompetition\chassistask.d)
 I (..\Applications\ChassisTask.h)(0x6523E453)
 I (..\Applications\RemoteTask.h)(0x6511A9D0)
 I (../boards/struct_typedef.h)(0x6500134C)
@@ -1111,7 +1111,7 @@ I (../boards/bsp_rc.h)(0x6500134C)
 I (../Algorithm/pid.h)(0x651BDF18)
 I (F:\software\Keil_v5\ARM\ARMCC\include\stdint.h)(0x57F606B8)
 I (..\Applications\CAN_Receive.h)(0x651EC058)
-I (..\Applications\GimbalTask.h)(0x6523DDAF)
+I (..\Applications\GimbalTask.h)(0x6524274F)
 I (../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h)(0x6506FC61)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h)(0x6506FC62)
 I (F:\software\Keil_v5\ARM\ARMCC\include\stddef.h)(0x57F606B8)
@@ -1129,8 +1129,8 @@ I (../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h)(0x6506FC62)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h)(0x6506FC62)
 I (F:\software\Keil_v5\ARM\ARMCC\include\math.h)(0x57F606B6)
 I (..\Applications\debug.h)(0x6523B548)
-F (..\Applications\GimbalTask.c)(0x6523DDAF)(--c99 -c --cpu Cortex-M4.fp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Algorithm -I ../Applications -I ../boards-I.\RTE\_2024AssessmentCompetition-IF:\software\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-IF:\software\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.13.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="523" -D_RTE_ -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx-o 2024assessmentcompetition\gimbaltask.o --omf_browse 2024assessmentcompetition\gimbaltask.crf --depend 2024assessmentcompetition\gimbaltask.d)
-I (..\Applications\GimbalTask.h)(0x6523DDAF)
+F (..\Applications\GimbalTask.c)(0x65242355)(--c99 -c --cpu Cortex-M4.fp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Algorithm -I ../Applications -I ../boards-I.\RTE\_2024AssessmentCompetition-IF:\software\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-IF:\software\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.13.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="523" -D_RTE_ -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx-o 2024assessmentcompetition\gimbaltask.o --omf_browse 2024assessmentcompetition\gimbaltask.crf --depend 2024assessmentcompetition\gimbaltask.d)
+I (..\Applications\GimbalTask.h)(0x6524274F)
 I (..\Applications\CAN_Receive.h)(0x651EC058)
 I (F:\software\Keil_v5\ARM\ARMCC\include\stdint.h)(0x57F606B8)
 I (..\Applications\RemoteTask.h)(0x6511A9D0)
@@ -1152,6 +1152,7 @@ I (../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h)(0x6506FC62)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h)(0x6506FC62)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h)(0x6506FC62)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h)(0x6506FC62)
+I (..\Applications\debug.h)(0x6523B548)
 F (..\Applications\RemoteTask.c)(0x6511B2B7)(--c99 -c --cpu Cortex-M4.fp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Algorithm -I ../Applications -I ../boards-I.\RTE\_2024AssessmentCompetition-IF:\software\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-IF:\software\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.13.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="523" -D_RTE_ -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx-o 2024assessmentcompetition\remotetask.o --omf_browse 2024assessmentcompetition\remotetask.crf --depend 2024assessmentcompetition\remotetask.d)
 I (..\Applications\RemoteTask.h)(0x6511A9D0)
 I (../boards/struct_typedef.h)(0x6500134C)
@@ -1189,7 +1190,7 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h)(0x6506FCB8)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h)(0x6506FCB8)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x6506FCB8)
 I (F:\software\Keil_v5\ARM\ARMCC\include\string.h)(0x57F606B8)
-F (..\Applications\ServoTask.c)(0x65241212)(--c99 -c --cpu Cortex-M4.fp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Algorithm -I ../Applications -I ../boards-I.\RTE\_2024AssessmentCompetition-IF:\software\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-IF:\software\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.13.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="523" -D_RTE_ -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx-o 2024assessmentcompetition\servotask.o --omf_browse 2024assessmentcompetition\servotask.crf --depend 2024assessmentcompetition\servotask.d)
+F (..\Applications\ServoTask.c)(0x65241DF5)(--c99 -c --cpu Cortex-M4.fp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Algorithm -I ../Applications -I ../boards-I.\RTE\_2024AssessmentCompetition-IF:\software\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-IF:\software\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.13.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="523" -D_RTE_ -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx-o 2024assessmentcompetition\servotask.o --omf_browse 2024assessmentcompetition\servotask.crf --depend 2024assessmentcompetition\servotask.d)
 I (..\Applications\ServoTask.h)(0x6511BCC0)
 I (../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h)(0x6506FC61)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h)(0x6506FC62)
@@ -1332,7 +1333,7 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h)(0x6506FCB8)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h)(0x6506FCB8)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h)(0x6506FCB8)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x6506FCB8)
-I (../Applications/GimbalTask.h)(0x6523DDAF)
+I (../Applications/GimbalTask.h)(0x6524274F)
 I (../Applications/CAN_Receive.h)(0x651EC058)
 I (../Applications/RemoteTask.h)(0x6511A9D0)
 I (../boards/bsp_rc.h)(0x6500134C)

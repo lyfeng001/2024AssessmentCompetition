@@ -148,7 +148,6 @@ void chassis_control_loop(chassis_move_t* chassis_move_data)
 		chassis_follow_yaw_control(chassis_move_data);
 	}
 	
-	debug_send(chassis_move_data->chassis_motor[0].speed,chassis_move_data->chassis_motor[0].speed_set,0.0);
 	
 	change_to_gimbal_orientation(chassis_move_data);
 	cal_from_whole_chassis_to_wheel(chassis_move_data);

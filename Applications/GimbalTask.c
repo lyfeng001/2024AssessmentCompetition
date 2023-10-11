@@ -1,6 +1,7 @@
 #include "GimbalTask.h"
 #include "cmsis_os.h"
 #include "CAN_Receive.h"
+#include "debug.h"
 
 #define rc_deadband_limit(input, output, dealine)        \
     {                                                    \
@@ -43,6 +44,7 @@ void gimbal_task(void const * argument)
 		gimbal_mode_change_control_transit(&gimbal_move_data);
 		gimbal_feedback_update(&gimbal_move_data);
 		gimbal_control_loop(&gimbal_move_data);
+//		debug_send(gimbal_move_data.gimbal_yaw_motor.relative_angle,gimbal_move_data.gimbal_yaw_motor.relative_angle_set,0.0);
 
 		CAN_cmd_gimbal(gimbal_move_data.gimbal_yaw_motor.give_current);
 		

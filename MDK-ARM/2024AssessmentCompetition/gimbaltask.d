@@ -21,3 +21,4 @@
 2024assessmentcompetition\gimbaltask.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h
 2024assessmentcompetition\gimbaltask.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h
 2024assessmentcompetition\gimbaltask.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h
+2024assessmentcompetition\gimbaltask.o: ..\Applications\debug.h

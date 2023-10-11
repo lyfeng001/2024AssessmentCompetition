@@ -13,7 +13,7 @@ const RC_ctrl_t *servo_rc;
 
 void servo_task(void const * argument)
 {
-	ctrl = 30;
+	ctrl = 40;
 	__HAL_TIM_SetCompare(&htim1,TIM_CHANNEL_1,ctrl);
 	while(1)
 	{
@@ -31,20 +31,20 @@ void servo_control(const RC_ctrl_t *servo_rc)
 	if(switch_is_up(servo_rc->rc.s[0]))
 	{
 
-		ctrl = (int)(ctrl + ((float)servo_rc->rc.ch[3] / 1320.0f * 5));
-		if(ctrl>=55)
+		ctrl = ((-(float)servo_rc->rc.ch[3]+660) / 1320.0f * 40 + 20);
+		if(ctrl>=60)
 		{
-			ctrl = 55;
+			ctrl = 60;
 		}
-		else if(ctrl<=5)
+		else if(ctrl<=20)
 		{
-			ctrl = 5;
+			ctrl = 20;
 		}
 		__HAL_TIM_SetCompare(&htim1,TIM_CHANNEL_1,ctrl);
 	}
 	else
 	{
-		__HAL_TIM_SetCompare(&htim1,TIM_CHANNEL_1,30);
+		__HAL_TIM_SetCompare(&htim1,TIM_CHANNEL_1,40);
 	}
 }
 
